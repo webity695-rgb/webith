@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webity - Digital Solutions</title>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; }
+
+    /* Header */
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav li a:hover { color: #38bdf8; }
+
+    .menu-btn {
+      display: none;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    section { padding: 80px 20px; }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(to right, #0f172a, #020617);
+      color: white;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .hero h1 { font-size: 48px; margin-bottom: 20px; }
+
+    .hero p {
+      margin-bottom: 30px;
+      font-size: 18px;
+      color: #cbd5f5;
+    }
+
+    .btn {
+      background: #38bdf8;
+      color: #020617;
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn:hover { background: #0ea5e9; }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .service-card:hover { transform: translateY(-5px); }
+
+    /* Portfolio Slider */
+    .logo-slider {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+
+    .logo-track {
+      display: flex;
+      width: calc(200px * 12);
+      animation: scrollLogos 25s linear infinite;
+    }
+
+    .logo-track img {
+      width: 180px;
+      margin: 0 20px;
+      filter: grayscale(100%);
+      transition: 0.3s;
+    }
+
+    .logo-track img:hover {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    @keyframes scrollLogos {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Testimonials */
+    .testimonials { background: #f1f5f9; }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .testimonial {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    /* Contact */
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 15px;
+      margin-bottom: 15px;
+      border: 2px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 15px;
+      background: #f8fafc;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+      background: white;
+    }
+
+    /* Language */
+    .settings-box {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    select {
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      margin-top: 10px;
+      border: 2px solid #e2e8f0;
+    }
+
+    /* Footer */
+    footer {
+      background: #020617;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #0f172a;
+        flex-direction: column;
+        width: 200px;
+        display: none;
+        padding: 20px;
+      }
+
+      nav ul.show { display: flex; }
+      .menu-btn { display: block; }
+      .hero h1 { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">
+      <img src="cbb60e5d-e2e8-448b-a77f-0e950b9f02e5.png" alt="Webity Logo">
+      <span>Webity</span>
+    </div>
+
+    <div class="menu-btn" id="menuBtn">☰</div>
+
+    <nav>
+      <ul id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#language">Language</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>We Build Modern Digital Experiences</h1>
+    <p>Webity provides professional web development and software solutions.</p>
+    <a href="#contact" class="btn">Get Started</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2>About Us</h2>
+    <p style="text-align:center; font-size:18px; max-width:800px; margin:auto;">
+      We specialize in logo design, web development, and custom software solutions.
+    </p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <h2>Our Services</h2>
+
+    <div class="services-grid">
+      <div class="service-card">Web Development</div>
+      <div class="service-card">Logo Design</div>
+      <div class="service-card">Software Solutions</div>
+      <div class="service-card">UI/UX Design</div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="container">
+    <h2>Portfolio</h2>
+
+    <div class="logo-slider">
+      <div class="logo-track">
+        <img src="logo1.png">
+        <img src="logo2.png">
+        <img src="logo3.png">
+        <img src="logo4.png">
+        <img src="logo5.png">
+        <img src="Untitled.png">
+
+        <img src="logo1.png">
+        <img src="logo2.png">
+        <img src="logo3.png">
+        <img src="logo4.png">
+        <img src="logo5.png">
+        <img src="Untitled.png">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <h2>Testimonials</h2>
+
+    <div class="testimonial-grid">
+      <div class="testimonial">Great service!</div>
+      <div class="testimonial">Very professional</div>
+      <div class="testimonial">Highly recommended</div>
+    </div>
+  </div>
+</section>
+
+<section id="language">
+  <div class="container">
+    <h2>Language</h2>
+
+    <div class="settings-box">
+      <p>Select Website Language</p>
+
+      <select>
+        <option>English</option>
+        <option>Azerbaijani</option>
+      </select>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Contact Us</h2>
+
+    <form class="contact-form" id="contactForm">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+
+      <input type="email" name="email" placeholder="Your Email" required>
+
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+      <button type="submit" class="btn">Send Message</button>
+
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Webity. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+  /* EmailJS Init */
+  (function(){
+    emailjs.init("wuu1Eo37gImIl_NGq");
+  })();
+
+  /* Mobile Menu */
+  const menuBtn = document.getElementById("menuBtn");
+  const navMenu = document.getElementById("navMenu");
+
+  menuBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+  });
+
+  /* Contact Form */
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_26hvsdv",
+      "template_svjapr8",
+      this
+    ).then(function() {
+
+      alert("Message sent successfully!");
+      document.getElementById("contactForm").reset();
+
+    }, function(error) {
+
+      alert("Failed to send message!");
+      console.log(error);
+
+    });
+
+  });
+
+</script>
+
+</body>
+</html>
